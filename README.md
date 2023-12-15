@@ -1,6 +1,6 @@
 # Git submodule
 
-This project uses git submodule for managing dependencies. In this case, we will manage `application.yml` with
+This project uses git submodule for managing dependencies. In this case, we will manage `application.yml` by
 submodule.
 
 ## Getting started with Spring Boot
@@ -9,9 +9,28 @@ We will test if the submodule is imported correctly with development and product
 
 ### Clone repository
 
+Submodule does not clone automatically when you clone repository. So you have to initialize and update submodule.
+
+```bash
+git clone https://github.com/whatasame-labs/git-submodule.git
+git submodule init
+git submodule update
+git submodule foreach git checkout main
+```
+
+or you can use `--recurse-submodules` option.
+
 ```bash
 git clone --recurse-submodules https://github.com/whatasame-labs/git-submodule.git
+git submodule foreach git checkout main
 ```
+
+If you are using IntelliJ IDEA, `Project from Version Control…` automatically initialize and update, so you should only
+run checkout command.
+
+> [!IMPORTANT]
+>
+> `git submodule foreach git checkout main` is required not to be in DETACHED HEAD state.
 
 ### Run test
 
@@ -48,15 +67,7 @@ git commit -m "build: Add submodule"
 If you want to commit after changing submodule in your repository, you have to commit two times.
 
 1. Commit in submodule
-    ```
-   # in submodule directory
-    git commit
-    ```
 2. Commit in main repository
-    ```
-   # in main repository
-    git commit
-    ```
 
 And you have to push following instruction.
 
@@ -70,7 +81,7 @@ git push --recurse-submodules=check # or --recurse-submodules=on-demand
 
 ### Update submodule
 
-If other developer updates submodule, you have to update it in your repository.
+If other developer updates your submodule, you can update it with following command.
 
 ```bash
 git submodule update --remote --merge
@@ -95,8 +106,8 @@ task copyFile(type: Copy) {
 
 ## Reference
 
-[7.11 Git Tools - Submodules | Git - Submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
+- [7.11 Git Tools - Submodules | Git - Submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
 
-[7.2.3. External Application Properties | Spring Boot Reference Documentation](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#features.external-config.files)
+- [7.2.3. External Application Properties | Spring Boot Reference Documentation](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#features.external-config.files)
 
-[Git submodule 사용하기 | 지금의 흔적](https://pinedance.github.io/blog/2019/05/28/Git-Submodule)
+- [Git submodule 사용하기 | 지금의 흔적](https://pinedance.github.io/blog/2019/05/28/Git-Submodule)
