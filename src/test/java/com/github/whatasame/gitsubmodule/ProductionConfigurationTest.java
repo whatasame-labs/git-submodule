@@ -24,15 +24,18 @@ class ProductionConfigurationTest {
 		/* given */
 		final String prodProblem = "Why couldn't the bicycle stand up by itself?";
 		final String prodAnswer = "It was two tired.";
+		final Double prodRate = 3.7;
 
 		/* when */
 		final String problem = environment.getProperty("secret.problem");
 		final String answer = environment.getProperty("secret.answer");
+		final Double rate = environment.getProperty("secret.rate", Double.class);
 
 		/* then */
 		assertAll(
 				() -> assertThat(problem).isEqualTo(prodProblem),
-				() -> assertThat(answer).isEqualTo(prodAnswer)
+				() -> assertThat(answer).isEqualTo(prodAnswer),
+				() -> assertThat(rate).isEqualTo(prodRate)
 		);
 	}
 

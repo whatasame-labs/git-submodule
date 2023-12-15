@@ -22,15 +22,18 @@ class DevelopmentConfigurationTest {
 		/* given */
 		final String devProblem = "What did Baby Corn say to Mama Corn?";
 		final String devAnswer = "Where's Pop Corn?";
+		final Double devRate = 4.3;
 
 		/* when */
 		final String problem = environment.getProperty("secret.problem");
 		final String answer = environment.getProperty("secret.answer");
+		final Double rate = environment.getProperty("secret.rate", Double.class);
 
 		/* then */
 		assertAll(
 				() -> assertThat(problem).isEqualTo(devProblem),
-				() -> assertThat(answer).isEqualTo(devAnswer)
+				() -> assertThat(answer).isEqualTo(devAnswer),
+				() -> assertThat(rate).isEqualTo(devRate)
 		);
 	}
 
